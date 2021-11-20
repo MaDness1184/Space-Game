@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 4085803065743776564}
   - component: {fileID: -6202438186149903933}
   - component: {fileID: -858091841964860554}
+  - component: {fileID: 1893411420057089021}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -195,6 +196,7 @@ MonoBehaviour:
   health: 10
   hitEffectPS: {fileID: 5142518584562279866, guid: 4bc7e086e6602d64182c1bd690be95ae, type: 3}
   applyCameraShake: 0
+  gameOverDelay: 1
 --- !u!114 &-6202438186149903933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,3 +233,22 @@ MonoBehaviour:
   useAI: 1
   randomFireRate: 1
   isFireing: 0
+--- !u!95 &1893411420057089021
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5548331015368636834}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

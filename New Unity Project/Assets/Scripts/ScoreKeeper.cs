@@ -42,7 +42,6 @@ public class ScoreKeeper : MonoBehaviour
     {
         currentScore += m_value;
         Mathf.Clamp(currentScore, 0, int.MaxValue);
-        Debug.Log(currentScore);
     }
 
     public void ResetScore() // resets score back to 0

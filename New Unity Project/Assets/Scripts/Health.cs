@@ -16,14 +16,17 @@ public class Health : MonoBehaviour
     CameraShake cameraShake;
     AudioPlayer audioPlayer;
     ScoreKeeper scoreKeeper;
-    LevelManager LevelManager;
+    LevelManager levelManager;
+
+    Animator myAnimator;
 
     void Awake()
     {
         audioPlayer = FindObjectOfType<AudioPlayer>(); // Find Reference to AudioPlayer Object
-        cameraShake = Camera.main.GetComponent<CameraShake>(); // Get Reference to CameraShake Component
+        cameraShake = Camera.main.GetComponent<CameraShake>(); // Get Reference to CameraShake Component on the Main Camera
         scoreKeeper = FindObjectOfType<ScoreKeeper>(); // Find Reference to ScoreKeeper Object
-        LevelManager = FindObjectOfType<LevelManager>(); // Find Reference to LevelManager Object
+        levelManager = FindObjectOfType<LevelManager>(); // Find Reference to LevelManager Object
+        myAnimator = GetComponent<Animator>(); // Reference to Animator Component
     }
 
     void OnTriggerEnter2D(Collider2D otherCollision)
@@ -60,9 +63,8 @@ public class Health : MonoBehaviour
     {
         if (hitEffectPS != null) // if explosion PS is attached to hitEffectPS Object
         {
-            ParticleSystem instance = Instantiate(hitEffectPS, transform.position, Quaternion.identity); // Instantiate an instance of hitEffectPS at this Object's transform
-            Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax); // Destroy instance after a breaf period - Destroy(gameObject, timePeriod);
-        }                              // instance.main.duration - duration of PS       instance.main.startLifetime.constantMax - the total lifetime in seconds that each new particle has
+            myAnimator.SetTrigger("takeDamage");
+        }
     }
 
     void ShakeCamera() // Shake camera when gameObject
@@ -76,10 +78,12 @@ public class Health : MonoBehaviour
     void Death() // Death method for gameObject
     {
         Destroy(gameObject);
+        ParticleSystem instance = Instantiate(hitEffectPS, transform.position, Quaternion.identity); // Instantiate an instance of hitEffectPS at this Object's transform
+        Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax); // Destroy instance after a breaf period - Destroy(gameObject, timePeriod);
         if (isPlayer)
         {
             audioPlayer.PlayDeathClip();
-            LevelManager.LoadGameOver();
+            levelManager.LoadGameOver();
         }
         else
         {
