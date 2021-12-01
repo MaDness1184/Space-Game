@@ -211,3 +211,36 @@ System memory in use after: 101.8 MB.
 Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2725.
 Total: 2.156100 ms (FindLiveObjects: 0.281900 ms CreateObjectMapping: 0.112200 ms MarkObjects: 1.687400 ms  DeleteObjects: 0.073600 ms)
 
+========================================================================
+Received Import Request.
+  Time since last request: 1011.010139 seconds.
+  path: Assets/Prefabs/Asteriod.prefab
+  artifactKey: Guid(7f9b34ae57977cd49a0a39ea8ea542a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Asteriod.prefab using Guid(7f9b34ae57977cd49a0a39ea8ea542a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb3df720a1bfbec7465e644e601a2f0f') in 0.099849 seconds
+  Import took 0.104905 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.914443 seconds.
+  path: Assets/Prefabs/Hazards
+  artifactKey: Guid(16e105c63823a8545a48aa1b9a473420) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Hazards using Guid(16e105c63823a8545a48aa1b9a473420) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fc54a999b02f786a29b23abdf468b58c') in 0.009352 seconds
+  Import took 0.014101 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 33.868494 seconds.
+  path: Assets/Prefabs/LevelManager.prefab
+  artifactKey: Guid(b1b28e4ed95d44448b679190fee21413) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/LevelManager.prefab using Guid(b1b28e4ed95d44448b679190fee21413) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2e8318e2c1e3c747df893757c7f85623') in 0.016182 seconds
+  Import took 0.020518 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.584739 seconds.
+  path: Assets/Prefabs/UI
+  artifactKey: Guid(ea24d2b25459b70438cb63c9c6bbcdb7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI using Guid(ea24d2b25459b70438cb63c9c6bbcdb7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa4cf3f3f1ada62a615c8a4bb608704d') in 0.007324 seconds
+  Import took 0.011024 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
