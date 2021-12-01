@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
+    const string PROJECTILE_PARENT_NAME = "Projectiles";
+    GameObject projectileParent;
+
     public GameObject projectilePrefab;
     public float projectileSpeed = 10f;
     public float projectileLifetime = 5f;
@@ -28,6 +31,7 @@ public class Shooter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CreateProjectileParent();
         if (useAI)
         {
             isFireing = true;
@@ -38,6 +42,15 @@ public class Shooter : MonoBehaviour
     void Update()
     {
         Fire();
+    }
+
+    public void CreateProjectileParent()
+    {
+        projectileParent = GameObject.Find(PROJECTILE_PARENT_NAME);
+        if (!projectileParent)
+        {
+            projectileParent = new GameObject(PROJECTILE_PARENT_NAME);
+        }
     }
 
     void Fire()
@@ -56,6 +69,7 @@ public class Shooter : MonoBehaviour
         while(true) // indefinate loop (never ends)
         {
             GameObject instance = Instantiate(projectilePrefab, transform.position, transform.rotation); // Instantiate object at Player's position
+            instance.transform.parent = projectileParent.transform;
             Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
             if (rb != null)
                 rb.velocity = transform.up * projectileSpeed;
