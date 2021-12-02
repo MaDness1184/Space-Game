@@ -43,6 +43,22 @@ public class Player : MonoBehaviour
         }
     }
 
+    void OnRotateLeft(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            // Rotate Player 90 deg left
+        }
+    }
+
+    void OnRotateRight(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            // Rotate Player 90 deg right
+        }
+    }
+
     void InitBounds() // Initialize the bounds of the screen at scene start
     {
         Camera mainCamera = Camera.main; // Stores the main camera of the scene in a variable mainCamera
