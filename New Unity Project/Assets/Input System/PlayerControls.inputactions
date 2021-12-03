@@ -38,7 +38,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Flash",
+                    "name": "Dash",
                     "type": "Button",
                     "id": "b26c5a92-cba9-450e-8f5c-f241b4629431",
                     "expectedControlType": "Button",
@@ -296,7 +296,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Flash",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -307,7 +307,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Flash",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

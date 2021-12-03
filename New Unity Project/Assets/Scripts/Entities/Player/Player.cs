@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     public float moveSpeed = 5f;
 
     [Header("Abilities")]
-    public float flashDistanceMult = 2f; 
+    public float dashDistanceMult = 2f; 
 
     // private
     Vector2 playerPosition;
@@ -100,11 +100,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnFlash(InputValue value)
+    void OnDash(InputValue value)
     {
         if(value.isPressed && CheckState(PlayerState.normal))
         {
-            Debug.Log("Flash");
+            Debug.Log("Dash");
         }
     }
 
