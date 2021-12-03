@@ -11,10 +11,17 @@ public enum PlayerState
 
 public class Player : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    [Header("Player State")]
     public PlayerState currentState;
 
+    [Header("Movement")]
+    public float moveSpeed = 5f;
+
+    [Header("Abilities")]
+    public float flashDistanceMult = 2f; 
+
     // private
+    Vector2 playerPosition;
     Vector2 rawInput; // The raw input value of move key
     Vector2 minBounds; // minimum bounds of the camera 
     Vector2 maxBounds; // maximum bounds of the camera
@@ -24,6 +31,7 @@ public class Player : MonoBehaviour
     {
         shooter = GetComponent<Shooter>();
         currentState = PlayerState.normal;
+        playerPosition = transform.position;
     }
 
     // Start is called before the first frame update
@@ -35,6 +43,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(playerPosition);
         if (CheckState(PlayerState.normal))
         {
             Movement();
@@ -110,10 +119,9 @@ public class Player : MonoBehaviour
     {
         Vector2 delta = rawInput * moveSpeed * Time.deltaTime; // Time.deltaTime = time it took the last frame to render / making movement framerate independent
 
-        Vector2 boundedPos = new Vector2(); // Movement kept in bounds of the screen
-        boundedPos.x = Mathf.Clamp(transform.position.x + delta.x, minBounds.x, maxBounds.x); // bind x movement
-        boundedPos.y = Mathf.Clamp(transform.position.y + delta.y, minBounds.y, maxBounds.y); // bind y movement
-
-        transform.position = boundedPos;
+        playerPosition.x = Mathf.Clamp(transform.position.x + delta.x, minBounds.x, maxBounds.x); // bind x movement
+        playerPosition.y = Mathf.Clamp(transform.position.y + delta.y, minBounds.y, maxBounds.y); // bind y movement
+ 
+        transform.position = playerPosition;
     }
 }
