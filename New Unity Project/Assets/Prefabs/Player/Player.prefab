@@ -9734,6 +9734,7 @@ GameObject:
   - component: {fileID: 1690298406}
   - component: {fileID: 1690298407}
   - component: {fileID: -6064722765257562554}
+  - component: {fileID: 8820816219198144083}
   - component: {fileID: 7271293002438424407}
   - component: {fileID: 967406035}
   - component: {fileID: 967406034}
@@ -9854,6 +9855,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!61 &8820816219198144083
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7271293002438424406}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.0001, y: 0.0001}
+  m_EdgeRadius: 0
 --- !u!61 &7271293002438424407
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9867,7 +9894,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00082957745, y: -0.12410402}
+  m_Offset: {x: 0.004388809, y: -0.07256895}
   m_SpriteTilingProperty:
     border: {x: 0.0625, y: 0.125, z: 0.0625, w: 0.1875}
     pivot: {x: 0.5, y: 0.5}
@@ -9878,7 +9905,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6206491, y: 0.36746347}
+  m_Size: {x: 1.0124457, y: 0.88281476}
   m_EdgeRadius: 0
 --- !u!114 &967406035
 MonoBehaviour:
@@ -9982,6 +10009,7 @@ MonoBehaviour:
   moveSpeed: 10
   dashSpeedMult: 50
   dashDelay: 0.1
+  dashCooldown: 0.5
   dashShakeMagnitude: 0.15
   dashShakeDuration: 0.1
 --- !u!114 &5398802158726358296
