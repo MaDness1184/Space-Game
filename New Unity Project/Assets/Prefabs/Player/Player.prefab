@@ -9734,13 +9734,13 @@ GameObject:
   - component: {fileID: 1690298406}
   - component: {fileID: 1690298407}
   - component: {fileID: -6064722765257562554}
-  - component: {fileID: 8820816219198144083}
+  - component: {fileID: 1690298408}
   - component: {fileID: 7271293002438424407}
   - component: {fileID: 967406035}
   - component: {fileID: 967406034}
   - component: {fileID: 5398802158726358296}
   - component: {fileID: 967406040}
-  - component: {fileID: 5508804871374532078}
+  - component: {fileID: 1690298409}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -9855,7 +9855,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &8820816219198144083
+--- !u!61 &1690298408
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9868,7 +9868,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.000000029802322, y: -0.06299919}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -9879,7 +9879,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0001, y: 0.0001}
+  m_Size: {x: 0.8627047, y: 0.74639845}
   m_EdgeRadius: 0
 --- !u!61 &7271293002438424407
 BoxCollider2D:
@@ -9894,7 +9894,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.004388809, y: -0.07256895}
+  m_Offset: {x: -0.0028946996, y: -0.12215868}
   m_SpriteTilingProperty:
     border: {x: 0.0625, y: 0.125, z: 0.0625, w: 0.1875}
     pivot: {x: 0.5, y: 0.5}
@@ -9905,7 +9905,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0124457, y: 0.88281476}
+  m_Size: {x: 0.7502383, y: 0.37585694}
   m_EdgeRadius: 0
 --- !u!114 &967406035
 MonoBehaviour:
@@ -10006,10 +10006,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  moveSpeed: 10
+  moveSpeed: 12
   dashSpeedMult: 50
   dashDelay: 0.1
-  dashCooldown: 0.5
+  dashCooldown: 0.3
   dashShakeMagnitude: 0.15
   dashShakeDuration: 0.1
 --- !u!114 &5398802158726358296
@@ -10044,14 +10044,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 3712948787993303153, guid: a5b5ea3aee418f34a99126efcd075c42, type: 3}
   projectileSpeed: 30
-  projectileLifetime: 5
+  projectileLifetime: 1
   basefireingRate: 0.1
   firingRateVariance: 0
   minFiringRate: 0.1
   useAI: 0
   randomFireRate: 0
   isFireing: 0
---- !u!114 &5508804871374532078
+--- !u!114 &1690298409
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

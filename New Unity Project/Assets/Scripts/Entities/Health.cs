@@ -13,6 +13,8 @@ public class Health : MonoBehaviour
     public bool applyCameraShake; // a bool determining if the Object hit will make the camera shake
     public float gameOverDelay = 1f;
 
+    private bool invulnerable = false;
+
     CameraShake cameraShake;
     AudioPlayer audioPlayer;
     ScoreKeeper scoreKeeper;
@@ -33,19 +35,32 @@ public class Health : MonoBehaviour
     {
         DamageDealer damageDealer = otherCollision.GetComponent<DamageDealer>();
 
-        if (damageDealer != null)
+        if (!invulnerable)
         {
-            TakeDamage(damageDealer.GetDamage());
-            PlayHitEffect(); // instantiate hitEffectPS
-            if (applyCameraShake)
-                ShakeCamera(); // shake the camera
-            damageDealer.Hit(); // Destroy the projectile/damage dealer
+            if (damageDealer != null)
+            {
+                TakeDamage(damageDealer.GetDamage());
+                PlayHitEffect(); // instantiate hitEffectPS
+                if (applyCameraShake)
+                    ShakeCamera(); // shake the camera
+                damageDealer.Hit(); // Destroy the projectile/damage dealer
+            }
         }
     }
 
     public int GetHealth() // returns current health of Object
     {
         return health;
+    }
+
+    public bool GetInvulnerability()
+    {
+        return invulnerable;
+    }
+
+    public void SetInvulnerability(bool newBool)
+    {
+        invulnerable = newBool;
     }
 
    void TakeDamage(int damage) // Updates health of Object and destroys it when health reaches 0;

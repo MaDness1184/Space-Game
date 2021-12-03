@@ -33,14 +33,18 @@ public class Player : MonoBehaviour
     Vector2 minBounds; // minimum bounds of the camera 
     Vector2 maxBounds; // maximum bounds of the camera
 
-    Shooter shooter; // Gets Shooter component of Player
+    Shooter myShooter; // Gets Shooter component of Player
+    DamageDealer myDamageDealer;
+    Health myHealth;
     Rigidbody2D myRigidbody2D;
     CameraShake cameraShake;
     #endregion
 
     void Awake()
     {
-        shooter = GetComponent<Shooter>();
+        myShooter = GetComponent<Shooter>();
+        myDamageDealer = GetComponent<DamageDealer>();
+        myHealth = GetComponent<Health>();
         myRigidbody2D = GetComponent<Rigidbody2D>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
     }
@@ -49,6 +53,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         currentState = PlayerState.normal;
+        myDamageDealer.SetDamageEnabler(false);
     }
 
     // Update is called once per frame
@@ -98,9 +103,9 @@ public class Player : MonoBehaviour
 
     void OnFire(InputValue value) // Called whenever Player inputs Fire
     {
-        if (shooter != null && CheckState(PlayerState.normal)) // Checking if the Shooter script is attached to our object
+        if (myShooter != null && CheckState(PlayerState.normal)) // Checking if the Shooter script is attached to our object
         {
-            shooter.isFireing = value.isPressed;
+            myShooter.isFireing = value.isPressed;
         }
     }
 
@@ -184,8 +189,12 @@ public class Player : MonoBehaviour
     #region Coroutines
     IEnumerator DashCo()
     {
+        myHealth.SetInvulnerability(true);
+        myDamageDealer.SetDamageEnabler(true);
         ChangeState(PlayerState.dash);
         yield return new WaitForSeconds(dashDelay);
+        myDamageDealer.SetDamageEnabler(false);
+        myHealth.SetInvulnerability(false);
         myRigidbody2D.velocity = Vector2.zero;
         ChangeState(PlayerState.normal);
     }

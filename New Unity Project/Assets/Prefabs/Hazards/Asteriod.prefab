@@ -118,7 +118,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.01986128, y: 0.04634297}
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  destroyAfterHitFactor: 1
+  destroyAfterHitFactor: 0
   hitFactor: 0
 --- !u!114 &7002890237960525544
 MonoBehaviour:
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayer: 0
   scoreValue: 0
-  health: 100
+  health: 50
   hitEffectPS: {fileID: 5142518584562279866, guid: 4bc7e086e6602d64182c1bd690be95ae, type: 3}
   applyCameraShake: 0
   gameOverDelay: 1

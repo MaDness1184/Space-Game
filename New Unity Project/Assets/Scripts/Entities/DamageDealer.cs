@@ -8,9 +8,25 @@ public class DamageDealer : MonoBehaviour
     public bool destroyAfterHitFactor = false; // Destroy projectile after hitFactor reached
     public int hitFactor = 0;
 
+    // private
+    private bool damageEnabler = true;
+
+    public bool GetDamageEnabler()
+    {
+        return damageEnabler;
+    }
+
     public int GetDamage()
     {
-        return damage;
+        if (damageEnabler)
+            return damage;
+        else
+            return 0;
+    }
+
+    public void SetDamageEnabler(bool newBool)
+    {
+        damageEnabler = newBool;
     }
 
     public void Hit() // When projectile hits an Object
