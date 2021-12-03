@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public enum PlayerState
 {
     normal,
-    flash
+    dash
 }
 
 public class Player : MonoBehaviour
@@ -18,12 +18,14 @@ public class Player : MonoBehaviour
     public float moveSpeed = 5f;
 
     [Header("Abilities")]
-    public float dashDistanceMult = 2f; 
+    public float dashSpeed = 2f;
+
+    [Header("Coroutines")]
+    [SerializeField] float dashDelay = 0.5f;
 
     // private
-    Vector2 playerPosition;
     Vector3 playerVelocity;
-    Vector2 rawInput; // The raw input value of move key
+    Vector2 playerInput; // The raw input value of move key
     Vector2 minBounds; // minimum bounds of the camera 
     Vector2 maxBounds; // maximum bounds of the camera
 
@@ -35,8 +37,7 @@ public class Player : MonoBehaviour
         shooter = GetComponent<Shooter>();
         myRigidbody2D = GetComponent<Rigidbody2D>();
         currentState = PlayerState.normal;
-        playerPosition = transform.position;
-        playerVelocity = myRigidbody2D.velocity;
+        playerVelocity = new Vector2(1f, 1f);
     }
 
     // Start is called before the first frame update
@@ -48,6 +49,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Debug.Log(playerInput);
         if (CheckState(PlayerState.normal))
         {
             Movement();
@@ -77,7 +79,7 @@ public class Player : MonoBehaviour
 
     void OnMove(InputValue value) // Called whenever Player inputs Move
     {
-        rawInput = value.Get<Vector2>();
+        playerInput = value.Get<Vector2>();
     }
 
     void OnFire(InputValue value) // Called whenever Player inputs Fire
@@ -108,7 +110,9 @@ public class Player : MonoBehaviour
     {
         if(value.isPressed && CheckState(PlayerState.normal))
         {
-            Debug.Log("Dash");
+            StartCoroutine(DashCo());
+            myRigidbody2D.velocity = playerInput * dashSpeed;
+            Debug.Log("Dashed");
         }
     }
 
@@ -121,10 +125,18 @@ public class Player : MonoBehaviour
 
     void Movement() // Move Player position with input and keep inside of bounds
     {
-        Vector3 delta = rawInput * moveSpeed * Time.fixedDeltaTime; // Time.deltaTime = time it took the last frame to render / making movement framerate independent
-        myRigidbody2D.MovePosition(transform.position + delta);
+        Vector3 playerVelocity = playerInput * moveSpeed * Time.fixedDeltaTime; // Time.deltaTime = time it took the last frame to render / making movement framerate independent
+        myRigidbody2D.MovePosition(transform.position + playerVelocity);
 
         //playerPosition.x = Mathf.Clamp(transform.position.x + delta.x, minBounds.x, maxBounds.x); // bind x movement
         //playerPosition.y = Mathf.Clamp(transform.position.y + delta.y, minBounds.y, maxBounds.y); // bind y movement
+    }
+
+    IEnumerator DashCo()
+    {
+        ChangeState(PlayerState.dash);
+        yield return new WaitForSeconds(dashDelay);
+        myRigidbody2D.velocity = Vector2.zero;
+        ChangeState(PlayerState.normal);
     }
 }

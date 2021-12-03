@@ -304,7 +304,7 @@
                     "name": "",
                     "id": "6dffddbe-e378-4a6c-9bab-b5354ab22625",
                     "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Dash",
