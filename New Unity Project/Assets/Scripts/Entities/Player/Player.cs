@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     {
         if (value.isPressed)
         {
-            // Rotate Player 90 deg left
+            transform.Rotate(0.0f, 0.0f, 90.0f);
         }
     }
 
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
     {
         if (value.isPressed)
         {
-            // Rotate Player 90 deg right
+            transform.Rotate(0.0f, 0.0f, -90.0f);
         }
     }
 
