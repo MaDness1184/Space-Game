@@ -22,16 +22,21 @@ public class Player : MonoBehaviour
 
     // private
     Vector2 playerPosition;
+    Vector3 playerVelocity;
     Vector2 rawInput; // The raw input value of move key
     Vector2 minBounds; // minimum bounds of the camera 
     Vector2 maxBounds; // maximum bounds of the camera
+
     Shooter shooter; // Gets Shooter component of Player
+    Rigidbody2D myRigidbody2D;
 
     void Awake()
     {
         shooter = GetComponent<Shooter>();
+        myRigidbody2D = GetComponent<Rigidbody2D>();
         currentState = PlayerState.normal;
         playerPosition = transform.position;
+        playerVelocity = myRigidbody2D.velocity;
     }
 
     // Start is called before the first frame update
@@ -41,9 +46,8 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        Debug.Log(playerPosition);
         if (CheckState(PlayerState.normal))
         {
             Movement();
@@ -117,11 +121,10 @@ public class Player : MonoBehaviour
 
     void Movement() // Move Player position with input and keep inside of bounds
     {
-        Vector2 delta = rawInput * moveSpeed * Time.deltaTime; // Time.deltaTime = time it took the last frame to render / making movement framerate independent
+        Vector3 delta = rawInput * moveSpeed * Time.fixedDeltaTime; // Time.deltaTime = time it took the last frame to render / making movement framerate independent
+        myRigidbody2D.MovePosition(transform.position + delta);
 
-        playerPosition.x = Mathf.Clamp(transform.position.x + delta.x, minBounds.x, maxBounds.x); // bind x movement
-        playerPosition.y = Mathf.Clamp(transform.position.y + delta.y, minBounds.y, maxBounds.y); // bind y movement
- 
-        transform.position = playerPosition;
+        //playerPosition.x = Mathf.Clamp(transform.position.x + delta.x, minBounds.x, maxBounds.x); // bind x movement
+        //playerPosition.y = Mathf.Clamp(transform.position.y + delta.y, minBounds.y, maxBounds.y); // bind y movement
     }
 }
