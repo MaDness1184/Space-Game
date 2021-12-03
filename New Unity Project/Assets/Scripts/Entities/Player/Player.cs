@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum PlayerState
+{
+    normal,
+    flash
+}
+
 public class Player : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    
+    public PlayerState currentState;
+
     // private
     Vector2 rawInput; // The raw input value of move key
     Vector2 minBounds; // minimum bounds of the camera 
@@ -16,6 +23,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         shooter = GetComponent<Shooter>();
+        currentState = PlayerState.normal;
     }
 
     // Start is called before the first frame update
@@ -27,7 +35,31 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movement();
+        if (CheckState(PlayerState.normal))
+        {
+            Movement();
+        }
+    }
+
+    public void ChangeState(PlayerState newState)
+    {
+        if (!CheckState(newState))
+        {
+            currentState = newState;
+        }
+    }
+
+    public void ChangeState(PlayerState newState, PlayerState oldState)
+    {
+        if (!CheckState(oldState))
+        {
+            currentState = newState;
+        }
+    }
+
+    public bool CheckState(PlayerState state) // Compares currentState with param.
+    {
+        return currentState == state;
     }
 
     void OnMove(InputValue value) // Called whenever Player inputs Move
@@ -37,7 +69,7 @@ public class Player : MonoBehaviour
 
     void OnFire(InputValue value) // Called whenever Player inputs Fire
     {
-        if (shooter != null) // Checking if the Shooter script is attached to our object
+        if (shooter != null && CheckState(PlayerState.normal)) // Checking if the Shooter script is attached to our object
         {
             shooter.isFireing = value.isPressed;
         }
@@ -45,7 +77,7 @@ public class Player : MonoBehaviour
 
     void OnRotateLeft(InputValue value)
     {
-        if (value.isPressed)
+        if (value.isPressed && CheckState(PlayerState.normal))
         {
             transform.Rotate(0.0f, 0.0f, 90.0f);
         }
@@ -53,9 +85,17 @@ public class Player : MonoBehaviour
 
     void OnRotateRight(InputValue value)
     {
-        if (value.isPressed)
+        if (value.isPressed && CheckState(PlayerState.normal))
         {
             transform.Rotate(0.0f, 0.0f, -90.0f);
+        }
+    }
+
+    void OnFlash(InputValue value)
+    {
+        if(value.isPressed && CheckState(PlayerState.normal))
+        {
+            Debug.Log("Flash");
         }
     }
 
