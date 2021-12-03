@@ -11,50 +11,62 @@ public enum PlayerState
 
 public class Player : MonoBehaviour
 {
+    #region Variables
+
     [Header("Player State")]
-    public PlayerState currentState;
+    [SerializeField] PlayerState currentState;
 
     [Header("Movement")]
-    public float moveSpeed = 5f;
+    [SerializeField] float moveSpeed = 5f;
 
-    [Header("Abilities")]
-    public float dashSpeed = 2f;
-
-    [Header("Coroutines")]
+    [Header("Dash")]
+    [SerializeField] float dashSpeedMult = 50f;
     [SerializeField] float dashDelay = 0.5f;
+    [SerializeField] float dashCooldown = 0.5f;
+    [SerializeField] float dashShakeMagnitude = 0.3f;
+    [SerializeField] float dashShakeDuration = 0.1f;
+    private float timeTillNextDash = 0.0f;
 
     // private
-    Vector3 playerVelocity;
+    Vector2 playerVelocity;
     Vector2 playerInput; // The raw input value of move key
     Vector2 minBounds; // minimum bounds of the camera 
     Vector2 maxBounds; // maximum bounds of the camera
 
     Shooter shooter; // Gets Shooter component of Player
     Rigidbody2D myRigidbody2D;
+    CameraShake cameraShake;
+    #endregion
 
     void Awake()
     {
         shooter = GetComponent<Shooter>();
         myRigidbody2D = GetComponent<Rigidbody2D>();
-        currentState = PlayerState.normal;
-        playerVelocity = new Vector2(1f, 1f);
+        cameraShake = Camera.main.GetComponent<CameraShake>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        InitBounds();
+        currentState = PlayerState.normal;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(playerInput);
         if (CheckState(PlayerState.normal))
         {
             Movement();
         }
     }
+
+    Vector2 GetPlayerPosition()
+    {
+        Vector2 playerPosition = new Vector2(transform.position.x, transform.position.y);
+        return playerPosition;
+    }
+
+    #region PlayerState
 
     public void ChangeState(PlayerState newState)
     {
@@ -76,7 +88,9 @@ public class Player : MonoBehaviour
     {
         return currentState == state;
     }
+    #endregion
 
+    #region InputActions
     void OnMove(InputValue value) // Called whenever Player inputs Move
     {
         playerInput = value.Get<Vector2>();
@@ -110,28 +124,64 @@ public class Player : MonoBehaviour
     {
         if(value.isPressed && CheckState(PlayerState.normal))
         {
-            StartCoroutine(DashCo());
-            myRigidbody2D.velocity = playerInput * dashSpeed;
-            Debug.Log("Dashed");
+            Dash();
         }
     }
+    #endregion
 
-    void InitBounds() // Initialize the bounds of the screen at scene start
-    {
-        Camera mainCamera = Camera.main; // Stores the main camera of the scene in a variable mainCamera
-        minBounds = mainCamera.ViewportToWorldPoint(new Vector2(0.02f, 0.02f)); // Converts Camera Position to World Position (Bottom Left)
-        maxBounds = mainCamera.ViewportToWorldPoint(new Vector2(0.98f, 0.98f)); // Converts Camera Position to World Position (Top Right)
-    }
+    #region Actions
 
     void Movement() // Move Player position with input and keep inside of bounds
     {
-        Vector3 playerVelocity = playerInput * moveSpeed * Time.fixedDeltaTime; // Time.deltaTime = time it took the last frame to render / making movement framerate independent
-        myRigidbody2D.MovePosition(transform.position + playerVelocity);
-
-        //playerPosition.x = Mathf.Clamp(transform.position.x + delta.x, minBounds.x, maxBounds.x); // bind x movement
-        //playerPosition.y = Mathf.Clamp(transform.position.y + delta.y, minBounds.y, maxBounds.y); // bind y movement
+        playerVelocity = playerInput * moveSpeed * Time.fixedDeltaTime; // Time.deltaTime = time it took the last frame to render / making movement framerate independent
+        myRigidbody2D.MovePosition(GetPlayerPosition() + playerVelocity);
     }
 
+    void Dash()
+    {
+        if (CheckCooldown(PlayerState.dash))
+        {
+            StartCoroutine(DashCo());
+            Vector2 force = playerInput * dashSpeedMult;
+            myRigidbody2D.AddForce(force, ForceMode2D.Impulse);
+            ShakeCamera();
+            StartCooldown(PlayerState.dash);
+        }
+    }
+
+    void ShakeCamera() // Shake camera when gameObject
+    {
+        if (cameraShake != null)
+        {
+            cameraShake.PlayCameraShake(dashShakeMagnitude, dashShakeDuration);
+        }
+    }
+    #endregion
+
+    #region Cooldowns
+    void StartCooldown(PlayerState cooldownType)
+    {
+        if (cooldownType == PlayerState.dash)
+        {
+            timeTillNextDash = Time.time + dashCooldown;
+        }
+    }
+
+    bool CheckCooldown(PlayerState cooldownType)
+    {
+        if (cooldownType == PlayerState.dash)
+        {
+            if (Time.time > timeTillNextDash)
+                return true;
+            else
+                return false;
+        }
+        Debug.Log("Ability not reconized for CooldownTimer");
+        return false;
+    }
+    #endregion Cooldowns
+
+    #region Coroutines
     IEnumerator DashCo()
     {
         ChangeState(PlayerState.dash);
@@ -139,4 +189,5 @@ public class Player : MonoBehaviour
         myRigidbody2D.velocity = Vector2.zero;
         ChangeState(PlayerState.normal);
     }
+    #endregion
 }
