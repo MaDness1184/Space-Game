@@ -2,20 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] bool isPlayer;
     [SerializeField] int scoreValue = 50;
 
-    public int health = 50;
-    public ParticleSystem hitEffectPS; // Stored reference to a explosion type PS Object
-
-    public bool applyCameraShake; // a bool determining if the Object hit will make the camera shake
-    public float gameOverDelay = 1f;
+    [SerializeField] int health = 50;
+    [SerializeField] ParticleSystem hitEffectPS; // Stored reference to a explosion type PS Object
 
     private bool invulnerable = false;
 
-    CameraShake cameraShake;
     AudioPlayer audioPlayer;
     ScoreKeeper scoreKeeper;
     LevelManager levelManager;
@@ -25,7 +20,6 @@ public class Health : MonoBehaviour
     void Awake()
     {
         audioPlayer = FindObjectOfType<AudioPlayer>(); // Find Reference to AudioPlayer Object
-        cameraShake = Camera.main.GetComponent<CameraShake>(); // Get Reference to CameraShake Component on the Main Camera
         scoreKeeper = FindObjectOfType<ScoreKeeper>(); // Find Reference to ScoreKeeper Object
         levelManager = FindObjectOfType<LevelManager>(); // Find Reference to LevelManager Object
         myAnimator = GetComponent<Animator>(); // Reference to Animator Component
@@ -41,8 +35,6 @@ public class Health : MonoBehaviour
             {
                 TakeDamage(damageDealer.GetDamage());
                 PlayHitEffect(); // instantiate hitEffectPS
-                if (applyCameraShake)
-                    ShakeCamera(); // shake the camera
                 damageDealer.Hit(); // Destroy the projectile/damage dealer
             }
         }
@@ -63,7 +55,7 @@ public class Health : MonoBehaviour
         invulnerable = newBool;
     }
 
-   void TakeDamage(int damage) // Updates health of Object and destroys it when health reaches 0;
+    void TakeDamage(int damage) // Updates health of Object and destroys it when health reaches 0;
     {
         health -= damage;
         if (health <= 0)
@@ -78,15 +70,7 @@ public class Health : MonoBehaviour
     {
         if (hitEffectPS != null) // if explosion PS is attached to hitEffectPS Object
         {
-            myAnimator.SetTrigger("takeDamage");
-        }
-    }
-
-    void ShakeCamera() // Shake camera when gameObject
-    {
-        if (cameraShake != null)
-        {
-            cameraShake.PlayCameraShake();
+            //myAnimator.SetTrigger("takeDamage");
         }
     }
 
@@ -95,15 +79,7 @@ public class Health : MonoBehaviour
         Destroy(gameObject);
         ParticleSystem instance = Instantiate(hitEffectPS, transform.position, Quaternion.identity); // Instantiate an instance of hitEffectPS at this Object's transform
         Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax); // Destroy instance after a breaf period - Destroy(gameObject, timePeriod);
-        if (isPlayer)
-        {
-            audioPlayer.PlayDeathClip();
-            levelManager.LoadGameOver();
-        }
-        else
-        {
-            scoreKeeper.UpdateCurrentScore(scoreValue);
-            audioPlayer.PlayDamageClip();
-        }
+        scoreKeeper.UpdateCurrentScore(scoreValue);
+        audioPlayer.PlayDamageClip();
     }
 }

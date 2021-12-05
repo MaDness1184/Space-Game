@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7002890237960525545}
   - component: {fileID: 7002890237960525547}
   - component: {fileID: 7002890237960525546}
-  - component: {fileID: 7002890237960525544}
   - component: {fileID: 7002890237960525550}
+  - component: {fileID: 5949698895083116215}
   m_Layer: 0
   m_Name: Asteriod
   m_TagString: Untagged
@@ -139,24 +139,6 @@ MonoBehaviour:
   damage: 10
   destroyAfterHitFactor: 0
   hitFactor: 0
---- !u!114 &7002890237960525544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7002890237960525559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90bf5f6ad05d05043ab2684c88cc389d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPlayer: 0
-  scoreValue: 0
-  health: 50
-  hitEffectPS: {fileID: 5142518584562279866, guid: 4bc7e086e6602d64182c1bd690be95ae, type: 3}
-  applyCameraShake: 0
-  gameOverDelay: 1
 --- !u!95 &7002890237960525550
 Animator:
   serializedVersion: 3
@@ -176,3 +158,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5949698895083116215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7002890237960525559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae149be7e031cc47a1eb2bc65d17b7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreValue: 50
+  health: 50
+  hitEffectPS: {fileID: 5142518584562279866, guid: 4bc7e086e6602d64182c1bd690be95ae, type: 3}
