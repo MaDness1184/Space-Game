@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 288968834}
   m_Layer: 6
   m_Name: Player Sprite
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 878103588}
   m_Layer: 6
   m_Name: Player Thrust
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9743,7 +9743,7 @@ GameObject:
   - component: {fileID: 1690298409}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10026,7 +10026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayer: 1
   scoreValue: 0
-  health: 100
+  health: 50
   hitEffectPS: {fileID: 5142518584562279866, guid: 4bc7e086e6602d64182c1bd690be95ae, type: 3}
   applyCameraShake: 1
   gameOverDelay: 1
@@ -10063,6 +10063,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff5c4f533b32ac74a95f87c5997a9bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 10
   destroyAfterHitFactor: 0
   hitFactor: 0

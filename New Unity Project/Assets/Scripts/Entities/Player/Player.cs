@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
 
     Shooter myShooter; // Gets Shooter component of Player
     DamageDealer myDamageDealer;
-    PlayerHealth myHealth;
+    Health myHealth;
     Rigidbody2D myRigidbody2D;
     CameraShake cameraShake;
     #endregion
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     {
         myShooter = GetComponent<Shooter>();
         myDamageDealer = GetComponent<DamageDealer>();
-        myHealth = GetComponent<PlayerHealth>();
+        myHealth = GetComponent<Health>();
         myRigidbody2D = GetComponent<Rigidbody2D>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
     }
@@ -181,7 +181,7 @@ public class Player : MonoBehaviour
             else
                 return false;
         }
-        Debug.Log("Invalid Cooldown Type");
+        Debug.Log("Ability not reconized for CooldownTimer");
         return false;
     }
     #endregion Cooldowns

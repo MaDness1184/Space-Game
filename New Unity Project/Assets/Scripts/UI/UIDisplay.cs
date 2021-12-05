@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.UI; // Access UI Classes of Unity Engine
 using TMPro; // Access to the TMP Class
 
-public class PlayerUI : MonoBehaviour
+public class UIDisplay : MonoBehaviour
 {
     [Header("Health")]
     [SerializeField] Slider healthSlider;
-    [SerializeField] PlayerHealth playerHealth;
+    [SerializeField] Health playerHealth;
 
     [Header("Score")]
-    //[SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI scoreText;
     ScoreKeeper scoreKeeper;
 
     void Awake()
@@ -29,6 +29,6 @@ public class PlayerUI : MonoBehaviour
     void Update()
     {
         healthSlider.value = playerHealth.GetHealth(); // Update Player health each frame
-        //scoreText.text = scoreKeeper.GetCurrentScore().ToString("0000"); // Update Player score each frame / ToString("000") adds leading 0s
+        scoreText.text = scoreKeeper.GetCurrentScore().ToString("0000"); // Update Player score each frame / ToString("000") adds leading 0s
     }
 }

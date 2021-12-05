@@ -94,10 +94,10 @@ GameObject:
   - component: {fileID: -3817540629658259412}
   - component: {fileID: 1312812267320604247}
   - component: {fileID: -148162054538150030}
+  - component: {fileID: 4085803065743776564}
   - component: {fileID: -6202438186149903933}
   - component: {fileID: -858091841964860554}
   - component: {fileID: 1893411420057089021}
-  - component: {fileID: 2864409821883828557}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -179,6 +179,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f902db2582262a469eb63c1682b2d01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4085803065743776564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5548331015368636834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90bf5f6ad05d05043ab2684c88cc389d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayer: 0
+  scoreValue: 50
+  health: 10
+  hitEffectPS: {fileID: 5142518584562279866, guid: 4bc7e086e6602d64182c1bd690be95ae, type: 3}
+  applyCameraShake: 0
+  gameOverDelay: 1
 --- !u!114 &-6202438186149903933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,21 +252,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2864409821883828557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5548331015368636834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ae149be7e031cc47a1eb2bc65d17b7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPlayer: 0
-  scoreValue: 50
-  health: 50
-  hitEffectPS: {fileID: 5142518584562279866, guid: 4bc7e086e6602d64182c1bd690be95ae, type: 3}
-  applyCameraShake: 0
-  gameOverDelay: 1
