@@ -9,6 +9,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] int health = 50;
     [SerializeField] ParticleSystem hitEffectPS; // Stored reference to a explosion type PS Object
 
+    [SerializeField] float hitInvulnerabilityTime = 0.2f;
+
     private bool invulnerable = false;
 
     AudioPlayer audioPlayer;
@@ -33,6 +35,7 @@ public class EnemyHealth : MonoBehaviour
         {
             if (damageDealer != null)
             {
+                Debug.Log("Damage Dealer " + damageDealer.name + " did " + damageDealer.GetDamage() + " to " + name);
                 TakeDamage(damageDealer.GetDamage());
                 PlayHitEffect(); // instantiate hitEffectPS
                 damageDealer.Hit(); // Destroy the projectile/damage dealer
@@ -55,8 +58,14 @@ public class EnemyHealth : MonoBehaviour
         invulnerable = newBool;
     }
 
+    public void Invulnerable(float waitTime)
+    {
+         StartCoroutine(InvulnerableCo(waitTime));
+    }
+
     void TakeDamage(int damage) // Updates health of Object and destroys it when health reaches 0;
     {
+        Invulnerable(hitInvulnerabilityTime);
         health -= damage;
         if (health <= 0)
         {
@@ -81,5 +90,12 @@ public class EnemyHealth : MonoBehaviour
         Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax); // Destroy instance after a breaf period - Destroy(gameObject, timePeriod);
         scoreKeeper.UpdateCurrentScore(scoreValue);
         audioPlayer.PlayDamageClip();
+    }
+
+    private IEnumerator InvulnerableCo(float waitTime)
+    {
+        invulnerable = true;
+        yield return new WaitForSeconds(waitTime);
+        invulnerable = false;
     }
 }

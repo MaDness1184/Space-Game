@@ -21,7 +21,8 @@ public class Player : MonoBehaviour
 
     [Header("Dash")]
     [SerializeField] float dashSpeedMult = 50f;
-    [SerializeField] float dashDelay = 0.5f;
+    [SerializeField] float dashMovementDelay = 0.5f;
+    [SerializeField] float dashInvulnerabilityTime = 0.6f;
     [SerializeField] float dashCooldown = 0.5f;
     [SerializeField] float dashShakeMagnitude = 0.3f;
     [SerializeField] float dashShakeDuration = 0.1f;
@@ -189,12 +190,11 @@ public class Player : MonoBehaviour
     #region Coroutines
     IEnumerator DashCo()
     {
-        myHealth.SetInvulnerability(true);
+        myHealth.Invulnerable(dashInvulnerabilityTime);
         myDamageDealer.SetDamageEnabler(true);
         ChangeState(PlayerState.dash);
-        yield return new WaitForSeconds(dashDelay);
+        yield return new WaitForSeconds(dashMovementDelay);
         myDamageDealer.SetDamageEnabler(false);
-        myHealth.SetInvulnerability(false);
         myRigidbody2D.velocity = Vector2.zero;
         ChangeState(PlayerState.normal);
     }
