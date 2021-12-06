@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int health = 100;
-    public ParticleSystem hitEffectPS; // Stored reference to a explosion type PS Object
+    [SerializeField] int health = 100;
+    [SerializeField] ParticleSystem hitEffectPS; // Stored reference to a explosion type PS Object
 
-    public float gameOverDelay = 1f;
+    [SerializeField] float gameOverDelay = 1f;
 
     [SerializeField] float hitInvulnerabilityTime = 0f;
 

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DamageDealer : MonoBehaviour
 {
-    public int damage = 10;
-    public bool destroyAfterHitFactor = false; // Destroy projectile after hitFactor reached
-    public int hitFactor = 0;
+    [SerializeField] int damage = 10;
+    [SerializeField] bool destroyAfterHitFactor = false; // Destroy projectile after hitFactor reached
+    [SerializeField] int hitFactor = 0;
 
     // private
     private bool damageEnabler = true;

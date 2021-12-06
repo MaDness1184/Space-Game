@@ -19,6 +19,10 @@ public class Player : MonoBehaviour
     [Header("Movement")]
     [SerializeField] float moveSpeed = 5f;
 
+    [Header("Ability Batterys")]
+    [SerializeField] int abilityBatteries = 3;
+    [SerializeField] int dashBatteryUsage = -1;
+
     [Header("Dash")]
     [SerializeField] float dashSpeedMult = 50f;
     [SerializeField] float dashMovementDelay = 0.5f;
@@ -70,6 +74,21 @@ public class Player : MonoBehaviour
     {
         Vector2 playerPosition = new Vector2(transform.position.x, transform.position.y);
         return playerPosition;
+    }
+
+    public int GetAbilityBatteries()
+    {
+        return abilityBatteries;
+    }
+
+    public void SetAbilityBatteries(int newBatteryLevel)
+    {
+        abilityBatteries = newBatteryLevel;
+    }
+
+    public void UpdateAbilityBatteries(int amount)
+    {
+        abilityBatteries += amount;
     }
 
     #region PlayerState
@@ -136,7 +155,6 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Actions
-
     void Movement() // Move Player position with input and keep inside of bounds
     {
         playerVelocity = playerInput * moveSpeed * Time.fixedDeltaTime; // Time.deltaTime = time it took the last frame to render / making movement framerate independent
@@ -152,6 +170,7 @@ public class Player : MonoBehaviour
             myRigidbody2D.AddForce(force, ForceMode2D.Impulse);
             ShakeCamera();
             StartCooldown(PlayerState.dash);
+            UpdateAbilityBatteries(dashBatteryUsage);
         }
     }
 

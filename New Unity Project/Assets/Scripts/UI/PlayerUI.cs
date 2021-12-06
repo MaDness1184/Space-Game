@@ -11,17 +11,16 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] PlayerHealth playerHealth;
     private int playerMaxHealth = 100;
 
-    [Header("Ability Bar")]
-    [SerializeField] Image abilityBarImage;
-
-    void Awake()
-    {
-
-    }
+    [Header("Ability Batteries")]
+    [SerializeField] Image[] batteries;
+    [SerializeField] Sprite fullBattery;
+    [SerializeField] Sprite emptyBattery;
+    [SerializeField] FloatReference playerBatteries;
 
     // Start is called before the first frame update
     void Start()
     {
+        InitializeBatteries();
         playerMaxHealth = playerHealth.GetHealth(); // slider maximum value = player's heath
     }
 
@@ -30,5 +29,29 @@ public class PlayerUI : MonoBehaviour
     {
         healthBarImage.fillAmount = (float)playerHealth.GetHealth() / (float)playerMaxHealth; // Update Player health each frame
         //scoreText.text = scoreKeeper.GetCurrentScore().ToString("0000"); // Update Player score each frame / ToString("000") adds leading 0s
+    }
+
+    public void InitializeBatteries()
+    {
+        for (int i = 0; i < playerBatteries.GetValue(); i++)
+        {
+            batteries[i].gameObject.SetActive(true);
+            batteries[i].sprite = fullBattery;
+        }
+    }
+
+    public void UpdateBatteries()
+    {
+        for (int i = 0; i < playerBatteries.GetValue(); i++)
+        {
+            if (i > playerBatteries.GetRuntimeValue() - 1)
+            {
+                batteries[i].sprite = fullBattery;
+            }
+            else
+            {
+                batteries[i].sprite = emptyBattery;
+            }
+        }
     }
 }
