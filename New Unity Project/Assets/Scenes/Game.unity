@@ -1178,7 +1178,7 @@ MonoBehaviour:
   - {fileID: 1735675354}
   - {fileID: 479976847}
   fullBattery: {fileID: 21300000, guid: d9fc511b64d727546ad99b761d77a096, type: 3}
-  emptyBattery: {fileID: 0}
+  emptyBattery: {fileID: 21300000, guid: 0d45fd242330108459aa96f6abde8fe0, type: 3}
   playerBatteries:
     useConstant: 0
     constantValue: 0
@@ -1390,6 +1390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1661305430}
   - component: {fileID: 1661305431}
+  - component: {fileID: 1661305432}
   m_Layer: 6
   m_Name: Ability Containers
   m_TagString: Untagged
@@ -1448,6 +1449,34 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1661305432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661305429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a87012262f3d74aa7e52da59638ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: eb324031e6a544f4ea418ce74020e88b, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1515003573}
+        m_TargetAssemblyTypeName: PlayerUI, Assembly-CSharp
+        m_MethodName: UpdateBatteries
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1735675352
 GameObject:
   m_ObjectHideFlags: 0
@@ -6791,8 +6820,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   moveSpeed: 12
-  abilityBatteries: 3
-  dashBatteryUsage: -1
+  playerBatteries:
+    useConstant: 0
+    constantValue: 0
+    variable: {fileID: 11400000, guid: 15dcdec7d074ffd47a3d39d784b710be, type: 2}
+  playerBatterySignal: {fileID: 11400000, guid: eb324031e6a544f4ea418ce74020e88b, type: 2}
+  dashBatteryUsage: 1
   dashSpeedMult: 50
   dashMovementDelay: 0.1
   dashInvulnerabilityTime: 0.15

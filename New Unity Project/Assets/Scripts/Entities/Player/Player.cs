@@ -20,8 +20,9 @@ public class Player : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
 
     [Header("Ability Batterys")]
-    [SerializeField] int abilityBatteries = 3;
-    [SerializeField] int dashBatteryUsage = -1;
+    [SerializeField] FloatReference playerBatteries;
+    [SerializeField] SignalSender playerBatterySignal;
+    [SerializeField] int dashBatteryUsage = 1;
 
     [Header("Dash")]
     [SerializeField] float dashSpeedMult = 50f;
@@ -76,19 +77,15 @@ public class Player : MonoBehaviour
         return playerPosition;
     }
 
-    public int GetAbilityBatteries()
+    public float GetAbilityBatteries()
     {
-        return abilityBatteries;
-    }
-
-    public void SetAbilityBatteries(int newBatteryLevel)
-    {
-        abilityBatteries = newBatteryLevel;
+        return playerBatteries.GetRuntimeValue();
     }
 
     public void UpdateAbilityBatteries(int amount)
     {
-        abilityBatteries += amount;
+        if (playerBatteries.GetRuntimeValue() > 0f)
+            playerBatteries.SubtractRuntimeValue(amount);
     }
 
     #region PlayerState
@@ -163,14 +160,17 @@ public class Player : MonoBehaviour
 
     void Dash()
     {
-        if (CheckCooldown(PlayerState.dash))
+        if (CheckCooldown(PlayerState.dash) && GetAbilityBatteries() > 0)
         {
             StartCoroutine(DashCo());
             Vector2 force = playerInput * dashSpeedMult;
             myRigidbody2D.AddForce(force, ForceMode2D.Impulse);
             ShakeCamera();
+
+            playerBatterySignal.Raise();
+            UpdateAbilityBatteries(dashBatteryUsage); // Update Batteries
+
             StartCooldown(PlayerState.dash);
-            UpdateAbilityBatteries(dashBatteryUsage);
         }
     }
 

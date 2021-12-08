@@ -44,7 +44,7 @@ public class PlayerUI : MonoBehaviour
     {
         for (int i = 0; i < playerBatteries.GetValue(); i++)
         {
-            if (i > playerBatteries.GetRuntimeValue() - 1)
+            if (i < playerBatteries.GetRuntimeValue() - 1)
             {
                 batteries[i].sprite = fullBattery;
             }

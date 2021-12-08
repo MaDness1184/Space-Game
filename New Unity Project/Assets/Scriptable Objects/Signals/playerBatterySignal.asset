@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52f60f6d3873f15498f7823659e9abac, type: 3}
-  m_Name: playerBatteries
+  m_Script: {fileID: 11500000, guid: a197d4a683461e4488108e5b50e6cd8f, type: 3}
+  m_Name: playerBatterySignal
   m_EditorClassIdentifier: 
-  value: 5

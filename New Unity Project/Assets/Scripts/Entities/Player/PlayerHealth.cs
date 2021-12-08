@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] int health = 100;
+
     [SerializeField] ParticleSystem hitEffectPS; // Stored reference to a explosion type PS Object
 
     [SerializeField] float gameOverDelay = 1f;
