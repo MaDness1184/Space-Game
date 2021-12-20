@@ -7,14 +7,14 @@ public class Shooter : MonoBehaviour
     const string PROJECTILE_PARENT_NAME = "Projectiles";
     GameObject projectileParent;
 
-    public GameObject projectilePrefab;
-    public float projectileSpeed = 10f;
-    public float projectileLifetime = 5f;
-    public float basefireingRate = 0.1f;
-    public float firingRateVariance = 0f;
-    public float minFiringRate = 0.1f;
-    public bool useAI;
-    public bool randomFireRate;
+    [SerializeField] GameObject projectilePrefab;
+    [SerializeField] float projectileSpeed = 20f;
+    [SerializeField] float projectileLifetime = 5f;
+    [SerializeField] float basefireingRate = 0.1f;
+    [SerializeField] float firingRateVariance = 0f;
+    [SerializeField] float minFiringRate = 0.1f;
+    [SerializeField] bool useAI;
+    [SerializeField] bool randomFireRate;
 
     [HideInInspector] public bool isFireing;
 

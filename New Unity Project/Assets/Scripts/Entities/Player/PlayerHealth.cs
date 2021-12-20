@@ -8,8 +8,6 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] ParticleSystem hitEffectPS; // Stored reference to a explosion type PS Object
 
-    [SerializeField] float gameOverDelay = 1f;
-
     [SerializeField] float hitInvulnerabilityTime = 0f;
 
     private bool invulnerable = false;

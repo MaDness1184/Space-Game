@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
-    public float shakeDuration = 0.5f; // duration of screen shake
-    public float shakeMagnitude = 0.5f; // how far the camera is going to move per frame
+    [SerializeField] float shakeDuration = 0.5f; // duration of screen shake
+    [SerializeField] float shakeMagnitude = 0.5f; // how far the camera is going to move per frame
 
     Vector3 initialPosition;
 

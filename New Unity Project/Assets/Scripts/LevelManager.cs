@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement; // include SceneManagement libraries
 
 public class LevelManager : MonoBehaviour
 {
-    public float gameOverDelay = 2.5f;
+    [SerializeField] float gameOverDelay = 2.5f;
+    
     ScoreKeeper scoreKeeper;
 
     void Awake()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class AudioPlayer : MonoBehaviour
 {
     [Header("Shooting")]
-    public AudioClip shootingClip;
+    [SerializeField] AudioClip shootingClip;
     [SerializeField] [Range(0f, 1f)] float shootingVolume = 0.2f;
 
     [Header("Damage")]
